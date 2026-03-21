@@ -633,43 +633,6 @@
 </div>
 
   <script>
-// ABRIR MODAL
-function abrirSelector(){
-  document.getElementById('modalOpciones').classList.add('active');
-}
-
-// CERRAR MODAL
-function cerrarSelector(){
-  document.getElementById('modalOpciones').classList.remove('active');
-}
-
-// ENVIAR UBICACIÓN
-function enviarUbicacion(telefono){
-  cerrarSelector();
-
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(position){
-
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-
-      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
-
-      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-      window.open(url, "_blank");
-
-    }, function(){
-      alert("No se pudo obtener tu ubicación");
-    });
-  } else {
-    alert("Tu navegador no soporta geolocalización");
-  }
-}
-<script>
-// ==========================
-// IMÁGENES
-// ==========================
 function openModal(src){
   var modal = document.getElementById("imageModal");
   var img = document.getElementById("modalImage");
@@ -720,7 +683,5 @@ function enviarUbicacion(telefono){
   }
 }
 </script>
-    <script>
-
 </body>
 </html>
