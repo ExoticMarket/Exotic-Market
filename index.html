@@ -668,64 +668,59 @@ function enviarUbicacion(telefono){
 }
 <script>
 // ==========================
-// MODAL IMÁGENES
+// IMÁGENES
 // ==========================
 function openModal(src){
-  const modal = document.getElementById('imageModal');
-  const modalImage = document.getElementById('modalImage');
+  var modal = document.getElementById("imageModal");
+  var img = document.getElementById("modalImage");
 
-  modalImage.src = src;
-  modal.classList.add('active');
+  img.src = src;
+  modal.style.display = "flex";
 }
 
-function closeModal(event){
-  if(event.target.id === 'imageModal' || event.target.classList.contains('close')){
-    document.getElementById('imageModal').classList.remove('active');
+function closeModal(e){
+  var modal = document.getElementById("imageModal");
+
+  if(e.target.id === "imageModal" || e.target.classList.contains("close")){
+    modal.style.display = "none";
   }
 }
-
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){
-    document.getElementById('imageModal').classList.remove('active');
-  }
-});
 
 // ==========================
-// MODAL UBICACIÓN
+// UBICACIÓN
 // ==========================
 function abrirSelector(){
-  document.getElementById('modalOpciones').classList.add('active');
+  document.getElementById("modalOpciones").style.display = "flex";
 }
 
 function cerrarSelector(){
-  document.getElementById('modalOpciones').classList.remove('active');
+  document.getElementById("modalOpciones").style.display = "none";
 }
 
-// ==========================
-// ENVIAR UBICACIÓN (CORRECTO)
-// ==========================
 function enviarUbicacion(telefono){
   cerrarSelector();
 
   if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(position){
+    navigator.geolocation.getCurrentPosition(function(pos){
 
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+      var lat = pos.coords.latitude;
+      var lon = pos.coords.longitude;
 
-      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
+      var mensaje = "Hola, mi ubicación: https://www.google.com/maps?q=" + lat + "," + lon;
 
-      const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensaje)}`;
+      var url = "https://api.whatsapp.com/send?phone=" + telefono + "&text=" + encodeURIComponent(mensaje);
 
       window.location.href = url;
 
     }, function(){
-      alert("Activa la ubicación para continuar");
+      alert("No se pudo obtener la ubicación");
     });
   } else {
     alert("Tu navegador no soporta ubicación");
   }
 }
 </script>
+    <script>
+
 </body>
 </html>
