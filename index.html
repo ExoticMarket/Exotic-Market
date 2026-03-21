@@ -249,11 +249,8 @@
     }
 
     .product-info{
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  height:100%;
-}
+      padding:16px;
+    }
 
     .product-info h3{
       margin:0 0 8px;
@@ -268,19 +265,24 @@
     }
 
     .price{
+  display:inline-block;
   font-family:'Bebas Neue', sans-serif;
-  font-size:1.9rem;
-  letter-spacing:2px;
-  color:#facc15;
+  font-size:1.5rem;
+  letter-spacing:1.5px;
+  color:#fff;
 
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #facc15,
-    0 0 20px #facc15,
-    0 0 40px #22c55e,
-    0 0 60px #22c55e;
+  background:linear-gradient(135deg, #22c55e, #16a34a);
+  padding:6px 14px;
+  border-radius:10px;
 
-  margin-top:8px;
+  box-shadow:
+    0 0 10px rgba(34,197,94,.7),
+    0 0 20px rgba(34,197,94,.5),
+    inset 0 1px 0 rgba(255,255,255,.2);
+
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+
+  margin-top:10px;
 }
 
     .modal{
