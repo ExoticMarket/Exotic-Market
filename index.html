@@ -706,28 +706,29 @@ function cerrarSelector(){
   document.getElementById('modalOpciones').classList.remove('active');
 }
 
-function enviarUbicacion(telefono) {
+<script>
+function enviarUbicacion(telefono){
   cerrarSelector();
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
 
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
 
-      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación es: https://www.google.com/maps?q=${lat},${lon}`;
+      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
 
-      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+      const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensaje)}`;
 
-      window.open(url, "_blank");
+      window.location.href = url;
 
-    }, function(error) {
-      alert("No se pudo obtener tu ubicación");
+    }, function(){
+      alert("Activa la ubicación para continuar");
     });
   } else {
-    alert("Tu navegador no soporta geolocalización");
+    alert("Tu navegador no soporta ubicación");
   }
 }
-  </script>
+</script>
 </body>
 </html>
