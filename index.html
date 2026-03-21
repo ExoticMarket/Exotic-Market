@@ -633,28 +633,40 @@
 </div>
 
   <script>
-    function openModal(src){
-      const modal = document.getElementById('imageModal');
-      const modalImage = document.getElementById('modalImage');
-      modalImage.src = src;
-      modal.classList.add('active');
-    }
+// ABRIR MODAL
+function abrirSelector(){
+  document.getElementById('modalOpciones').classList.add('active');
+}
 
-    function closeModal(event){
-      if(event.target.id === 'imageModal' || event.target.classList.contains('close')){
-        document.getElementById('imageModal').classList.remove('active');
-      }
-    }
+// CERRAR MODAL
+function cerrarSelector(){
+  document.getElementById('modalOpciones').classList.remove('active');
+}
 
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape'){
-        document.getElementById('imageModal').classList.remove('active');
-      }
+// ENVIAR UBICACIÓN
+function enviarUbicacion(telefono){
+  cerrarSelector();
+
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
+
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+
+    }, function(){
+      alert("No se pudo obtener tu ubicación");
     });
-  </script>
-
-      }
-  <script>
+  } else {
+    alert("Tu navegador no soporta geolocalización");
+  }
+}
+</script>
   function enviarUbicacion() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
