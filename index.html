@@ -666,39 +666,34 @@ function enviarUbicacion(telefono){
     alert("Tu navegador no soporta geolocalización");
   }
 }
-</script>
-  function enviarUbicacion() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+<script>
+// ==========================
+// MODAL IMÁGENES
+// ==========================
+function openModal(src){
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
 
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        const mensaje = `Hola, esta es mi ubicación: https://www.google.com/maps?q=${lat},${lon}`;
-
-        let opcion = prompt("Elige una opción:\n1 - 322 121 7588\n2 - 322 263 2125\n3 - 322 438 0468");
-
-let telefono = "";
-
-if(opcion == "1") telefono = "523221217588";
-else if(opcion == "2") telefono = "523222632125";
-else if(opcion == "3") telefono = "523224580468";
-else {
-  alert("Opción inválida");
-  return;
+  modalImage.src = src;
+  modal.classList.add('active');
 }
 
-        const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+function closeModal(event){
+  if(event.target.id === 'imageModal' || event.target.classList.contains('close')){
+    document.getElementById('imageModal').classList.remove('active');
+  }
+}
 
-        window.open(url, "_blank");
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.getElementById('imageModal').classList.remove('active');
+  }
+});
 
-      }, function(error) {
-        alert("No se pudo obtener tu ubicación");
-      });
-    } else {
-      alert("Tu navegador no soporta geolocalización");
-    }
-  function abrirSelector(){
+// ==========================
+// MODAL UBICACIÓN
+// ==========================
+function abrirSelector(){
   document.getElementById('modalOpciones').classList.add('active');
 }
 
@@ -706,7 +701,9 @@ function cerrarSelector(){
   document.getElementById('modalOpciones').classList.remove('active');
 }
 
-<script>
+// ==========================
+// ENVIAR UBICACIÓN (CORRECTO)
+// ==========================
 function enviarUbicacion(telefono){
   cerrarSelector();
 
