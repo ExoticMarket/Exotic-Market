@@ -669,7 +669,7 @@ function enviarUbicacion(telefono){
       var lat = pos.coords.latitude;
       var lon = pos.coords.longitude;
 
-      var mensaje = "Hola, mi ubicación: https://www.google.com/maps?q=" + lat + "," + lon;
+      var mensaje = "Hola, quiero hacer un pedido a esta ubicacion: https://www.google.com/maps?q=" + lat + "," + lon;
 
       var url = "https://api.whatsapp.com/send?phone=" + telefono + "&text=" + encodeURIComponent(mensaje);
 
