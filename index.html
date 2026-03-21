@@ -395,7 +395,43 @@
       .section-title{
         font-size:2.5rem;
       }
-    }
+      .btn-ubicacion{
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color:white;
+  padding:16px 28px;
+  font-size:18px;
+  font-weight:bold;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.35),
+             0 0 20px rgba(34,197,94,.5);
+  transition: all .25s ease;
+}
+
+.btn-ubicacion:hover{
+  transform: scale(1.05);
+  box-shadow:0 10px 30px rgba(0,0,0,.45),
+             0 0 30px rgba(34,197,94,.8);
+}
+
+.opcion-btn{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:12px;
+  background:#1f2937;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+  transition:.2s;
+}
+
+.opcion-btn:hover{
+  background:#22c55e;
+}
   </style>
 </head>
 <body>
@@ -445,7 +481,11 @@
       </div>
     </header>
 
-    <button onclick="enviarUbicacion()">📍 Enviar mi ubicación para pedido</button>
+    <div style="text-align:center; margin-top:20px;">
+  <button class="btn-ubicacion" onclick="abrirSelector()">
+    📍 Enviar ubicación para entrega
+  </button>
+</div>
 
     <section>
       <h2 class="section-title">LO MAS PEDIDO:</h2>
@@ -566,6 +606,30 @@
       <img id="modalImage" src="" alt="Imagen ampliada">
     </div>
   </div>
+       <div class="modal" id="modalOpciones">
+  <div class="modal-content" style="background:#111827; padding:25px; border-radius:16px; text-align:center;">
+
+    <h3 style="margin-bottom:15px;">Selecciona un número</h3>
+
+    <button class="opcion-btn" onclick="enviarUbicacion('523221217588')">
+      📱 Opción 1 - 322 121 7588
+    </button>
+
+    <button class="opcion-btn" onclick="enviarUbicacion('523222632125')">
+      📱 Opción 2 - 322 263 2125
+    </button>
+
+    <button class="opcion-btn" onclick="enviarUbicacion('523224380468')">
+      📱 Opción 3 - 322 458 0468
+    </button>
+
+    <br><br>
+    <button onclick="cerrarSelector()" style="padding:8px 14px; border:none; border-radius:8px; cursor:pointer;">
+      Cancelar
+    </button>
+
+  </div>
+</div>
 
   <script>
     function openModal(src){
@@ -621,7 +685,36 @@ else {
     } else {
       alert("Tu navegador no soporta geolocalización");
     }
+  function abrirSelector(){
+  document.getElementById('modalOpciones').classList.add('active');
+}
+
+function cerrarSelector(){
+  document.getElementById('modalOpciones').classList.remove('active');
+}
+
+function enviarUbicacion(telefono) {
+  cerrarSelector();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const mensaje = `Hola, quiero hacer un pedido. Mi ubicación es: https://www.google.com/maps?q=${lat},${lon}`;
+
+      const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank");
+
+    }, function(error) {
+      alert("No se pudo obtener tu ubicación");
+    });
+  } else {
+    alert("Tu navegador no soporta geolocalización");
   }
+}
   </script>
 </body>
 </html>
