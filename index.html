@@ -451,17 +451,28 @@
         (Los precios no incluyen envio).
       </p>
 
-      <div class="products">
-        <article class="product">
-          <button type="button" onclick="openModal('imagenes/producto1.png')">
-            <img src="imagenes/producto1.png" alt="Onza 28g">
-          </button>
-          <div class="product-info">
-            <h3>Onza - 28g</h3>
-            <p>Variedad de onzas hibridas, indica y sativa de los sabores Gelato, Cotton Candy, OG. (Pregunta por disponibilidad)</p>
-            <div class="price">$800 MXN</div>
-          </div>
-        </article>
+      <article class="product">
+
+  <div class="slider" id="slider1">
+    
+    <button class="slide-btn left" onclick="moveSlide(-1, 'slider1')">❮</button>
+
+    <img src="imagenes/producto1.png" class="slide active" onclick="openModal(this.src)">
+    <img src="imagenes/producto1B.png" class="slide" onclick="openModal(this.src)">
+    <img src="imagenes/producto1C.png" class="slide" onclick="openModal(this.src)">
+
+    <button class="slide-btn right" onclick="moveSlide(1, 'slider1')">❯</button>
+
+  </div>
+
+  <!-- 🔥 ESTO ES LO QUE TE FALTABA -->
+  <div class="product-info">
+    <h3>Onza - 28g</h3>
+    <p>Variedad de onzas hibridas, indica y sativa de los sabores Gelato, Cotton Candy, OG. (Pregunta por disponibilidad)</p>
+    <div class="price">$800 MXN</div>
+  </div>
+
+</article>
 
         <article class="product">
           <button type="button" onclick="openModal('imagenes/producto2.png')">
