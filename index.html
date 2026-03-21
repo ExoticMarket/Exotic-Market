@@ -396,50 +396,6 @@
         font-size:2.5rem;
       }
     }
-    .slider{
-  position:relative;
-  width:100%;
-  height:260px;
-  overflow:hidden;
-}
-
-/* 🔥 IMPORTANTE */
-.slide{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  top:0;
-  left:0;
-  opacity:0;
-  transition:opacity .4s ease;
-}
-
-.slide.active{
-  opacity:1;
-}
-
-/* 🔥 BOTONES BONITOS */
-.slide-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,.5);
-  color:#fff;
-  border:none;
-  font-size:1.4rem;
-  padding:6px 10px;
-  cursor:pointer;
-  border-radius:8px;
-  z-index:5;
-}
-
-.slide-btn.left{ left:10px; }
-.slide-btn.right{ right:10px; }
-
-.slide-btn:hover{
-  background:rgba(0,0,0,.8);
-}
   </style>
 </head>
 <body>
@@ -495,27 +451,17 @@
         (Los precios no incluyen envio).
       </p>
 
-      <article class="product">
-
-  <div class="slider" id="slider1">
-    
-    <button class="slide-btn left" onclick="moveSlide(-1, 'slider1')">❮</button>
-
-    <img src="imagenes/producto1.png" class="slide active" onclick="openModal(this.src)">
-    <img src="imagenes/producto1.png" class="slide" onclick="openModal(this.src)">
-    <img src="imagenes/producto1.png" class="slide" onclick="openModal(this.src)">
-
-    <button class="slide-btn right" onclick="moveSlide(1, 'slider1')">❯</button>
-
-  </div>
-
-  <div class="product-info">
-    <h3>Onza - 28g</h3>
-    <p>Variedad de onzas hibridas, indica y sativa de los sabores Gelato, Cotton Candy, OG. (Pregunta por disponibilidad)</p>
-    <div class="price">$800 MXN</div>
-  </div>
-
-</article>
+      <div class="products">
+        <article class="product">
+          <button type="button" onclick="openModal('imagenes/producto1.png')">
+            <img src="imagenes/producto1.png" alt="Onza 28g">
+          </button>
+          <div class="product-info">
+            <h3>Onza - 28g</h3>
+            <p>Variedad de onzas hibridas, indica y sativa de los sabores Gelato, Cotton Candy, OG. (Pregunta por disponibilidad)</p>
+            <div class="price">$800 MXN</div>
+          </div>
+        </article>
 
         <article class="product">
           <button type="button" onclick="openModal('imagenes/producto2.png')">
@@ -626,28 +572,6 @@
       modalImage.src = src;
       modal.classList.add('active');
     }
-
-    function moveSlide(direction, sliderId){
-  const slider = document.getElementById(sliderId);
-  const slides = slider.querySelectorAll('.slide');
-
-  let index = 0;
-
-  slides.forEach((slide, i)=>{
-    if(slide.classList.contains('active')){
-      index = i;
-    }
-    slide.classList.remove('active');
-  });
-
-  index += direction;
-
-  if(index < 0) index = slides.length - 1;
-  if(index >= slides.length) index = 0;
-
-  slides[index].classList.add('active');
-}
-}
 
     function closeModal(event){
       if(event.target.id === 'imageModal' || event.target.classList.contains('close')){
