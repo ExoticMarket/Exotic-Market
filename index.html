@@ -432,17 +432,24 @@
 
       .section-title{
         font-size:2.5rem;
-      /* ===== SLIDER PRODUCTO 4 ===== */
+
 .slider-container{
   position: relative;
-  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
 }
 
-.slider-container img{
+.slider-track{
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slider-track img{
   width: 100%;
   height: 260px;
   object-fit: cover;
-  border-radius: 12px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .slider-btn{
@@ -456,20 +463,11 @@
   height: 35px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
   z-index: 2;
 }
 
-.slider-btn.prev{
-  left: 10px;
-}
-
-.slider-btn.next{
-  right: 10px;
-}
-
-.slider-btn:hover{
-  background: rgba(0,0,0,.85);
+.prev{ left: 10px; }
+.next{ right: 10px; }
 }
   </style>
 </head>
@@ -568,12 +566,20 @@
 
         <article class="product">
   <button type="button" onclick="openModal('imagenes/producto4.png')">
-    <div class="slider-container">
+    <div class="slider-container" id="slider-container-4">
+  <div id="modal" class="modal" onclick="closeModal()">
+  <img id="modal-img">
+  <div class="slider-track" id="track-4">
+    <img src="imagenes/producto4.png">
+    <img src="imagenes/producto42.png">
+    <img src="imagenes/producto43.png">
+    <img src="imagenes/producto44.png">
+  </div>
+
   <button class="slider-btn prev" onclick="moveSlide(4, -1)">❮</button>
-
-  <img id="slider-4" src="imagenes/producto4.png" alt="Producto 4">
-
   <button class="slider-btn next" onclick="moveSlide(4, 1)">❯</button>
+
+</div>
   <div class="product-info">
     <h3>Pre-Rolados PREMIUM (5 piezas) 🔥</h3>
     <p>Variedad de sabores en Sluggers, Baby Jeeter, Sherbinski (Precio por cigarro $350 MXN)</p>
@@ -691,9 +697,6 @@ function closeModal(e){
   }
 }
 
-// ==========================
-// UBICACIÓN
-// ==========================
 function abrirSelector(){
   document.getElementById("modalOpciones").style.display = "flex";
 }
@@ -724,7 +727,6 @@ function enviarUbicacion(telefono){
     alert("Tu navegador no soporta ubicación");
   }
 }
-   <script>
   const sliders = {
     4: [
       "imagenes/producto4.png",
@@ -753,10 +755,20 @@ function enviarUbicacion(telefono){
       sliders[productId][sliderIndex[productId]];
   }
 
-  // 👉 AUTO SLIDER (cada 3 segundos)
   setInterval(() => {
     moveSlide(4, 1);
   }, 3000);
+    
+document.querySelectorAll(".slider-track img").forEach(img => {
+  img.addEventListener("click", () => {
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("modal-img").src = img.src;
+  });
+});
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
 </script>
 </body>
 </html>
