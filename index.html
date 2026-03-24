@@ -725,33 +725,38 @@ function enviarUbicacion(telefono){
   }
 }
    <script>
-     const sliders = {
-       4: [
-         "imagenes/producto4.png",
-         "imagenes/producto42.png",
-         "imagenes/producto43.png",
-         "imagenes/producto44.png"
-       ]
-     };
+  const sliders = {
+    4: [
+      "imagenes/producto4.png",
+      "imagenes/producto42.png",
+      "imagenes/producto43.png",
+      "imagenes/producto44.png"
+    ]
+  };
 
-     const sliderIndex = {
-       4: 0
-     };
+  const sliderIndex = {
+    4: 0
+  };
 
-     function moveSlide(productId, step){
-       sliderIndex[productId] += step;
+  function moveSlide(productId, step){
+    sliderIndex[productId] += step;
 
-       if (sliderIndex[productId] < 0){
-         sliderIndex[productId] = sliders[productId].length - 1;
-       }
+    if (sliderIndex[productId] < 0){
+      sliderIndex[productId] = sliders[productId].length - 1;
+    }
 
-       if (sliderIndex[productId] >= sliders[productId].length){
-         sliderIndex[productId] = 0;
-       }
+    if (sliderIndex[productId] >= sliders[productId].length){
+      sliderIndex[productId] = 0;
+    }
 
-       document.getElementById("slider-" + productId).src =
-         sliders[productId][sliderIndex[productId]];
-     }
-   </script>
+    document.getElementById("slider-" + productId).src =
+      sliders[productId][sliderIndex[productId]];
+  }
+
+  // 👉 AUTO SLIDER (cada 3 segundos)
+  setInterval(() => {
+    moveSlide(4, 1);
+  }, 3000);
+</script>
 </body>
 </html>
